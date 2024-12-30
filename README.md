@@ -8,8 +8,8 @@ $subscriptionIds = @(
     "subscription-id-3"
 )
 
-# Directory to save the configuration files
-$outputDirectory = "C:\AzureDefenderConfigs"
+# Directory to save the configuration files (same location as the script file)
+$outputDirectory = $PSScriptRoot
 if (-Not (Test-Path $outputDirectory)) {
     New-Item -ItemType Directory -Path $outputDirectory -Verbose
 }
