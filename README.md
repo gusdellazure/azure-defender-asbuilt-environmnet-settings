@@ -1,9 +1,3 @@
-# azure-defender-asbuilt-environmnet-settings
-Script to download azure defender environment settings 
-
-information about each step of the process. Here is the enhanced script with logging and verbose output:
-
-```powershell
 # Enable verbose output
 $VerbosePreference = "Continue"
 
@@ -52,29 +46,26 @@ foreach ($subscriptionId in $subscriptionIds) {
         $configJson = $defenderConfig | ConvertTo-Json -Depth 10
         Log-Message "Converted configuration to JSON for $subscriptionId"
 
+        # Check if the output directory and file path are set correctly
+        if (-Not $outputDirectory) {
+            throw "Output directory is not set."
+        }
+        if (-Not $configJson) {
+            throw "Configuration JSON is null or empty."
+        }
+
         # Save the JSON to a file
         $outputFile = Join-Path $outputDirectory "$subscriptionId-DefenderConfig.json"
+        if (-Not $outputFile) {
+            throw "Output file path is not set."
+        }
         Set-Content -Path $outputFile -Value $configJson -Verbose
         Log-Message "Configuration saved to $outputFile for subscription $subscriptionId"
 
     } catch {
-        Log-Message "Error processing subscription $subscriptionId: $_"
+        Log-Message "Error processing subscription $subscriptionId: $($_.Exception.Message)"
     }
 }
 
 Log-Message "Script execution completed."
 Write-Output "All configurations have been downloaded and saved."
-```
-
-### Explanation
-1. **Verbose Output**: The `$VerbosePreference` variable is set to "Continue" to enable verbose output for all commands that support it.
-2. **Log Function**: A `Log-Message` function is defined to write log messages to a log file with a timestamp.
-3. **Log File Path**: The path for the log file is specified, and the log file is created in the output directory.
-4. **Logging Steps**: Log messages are added at key points in the script to provide information about the current operation and any errors encountered.
-5. **Try-Catch Block**: A `try-catch` block is used to handle any errors that occur during the processing of each subscription, and errors are logged accordingly.
-
-### Running the Script
-1. Open a PowerShell window.
-2. Run the script.
-
-This script will now provide detailed logging information in the console and save the log messages to a log file in the specified output directory. This will help you track the progress and debug any issues that may arise.
