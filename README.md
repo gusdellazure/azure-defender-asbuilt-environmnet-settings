@@ -1,7 +1,7 @@
 # azure-defender-asbuilt-environmnet-settings
 Script to download azure defender environment settings 
 
-Certainly! To add logging and verbose output to the script for downloading Azure Defender subscription configuration environment settings, we can use additional PowerShell features to provide more detailed information about each step of the process. Here is the enhanced script with logging and verbose output:
+information about each step of the process. Here is the enhanced script with logging and verbose output:
 
 ```powershell
 # Enable verbose output
