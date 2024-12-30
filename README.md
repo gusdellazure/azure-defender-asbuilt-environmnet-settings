@@ -63,7 +63,7 @@ foreach ($subscriptionId in $subscriptionIds) {
         Log-Message "Configuration saved to $outputFile for subscription $subscriptionId"
 
     } catch {
-        Log-Message "Error processing subscription $subscriptionId: $($_.Exception.Message)"
+        Log-Message "Error processing subscription ${subscriptionId}: $($_.Exception.Message)"
     }
 }
 
